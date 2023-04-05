@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+</head> 
+  <header>
+<div class="w3-container ">   
+  <h1 class="solid"><b>Survey Form</b></h1>
+  <h3 class="solid" text-align="center"> Welcome to Sree's Survey Page!</h3>
+</div>
+</header>
+<body >
+<div class="w3-row">
+<div class="w3-col m6 w3-container">
+<form name="studentForm" action="/action_page.php" autocomplete="on" onsubmit="return validateForm()" method="post">
+<!-- Enter First Name here-->
+<p>First Name *</p>
+<input id="v1" type="text" name="First Name" autofocus="autofocus" placeholder="FirstName"/>
+<!-- Enter Last Name here-->
+<p>Last Name *</p>
+<input id="v1" type="text" name="Last Name" autofocus="autofocus" placeholder="LastName"/>
+<!-- Enter Street Address here -->
+<p>Street Address *</p>
+<input type="text" name="streetAddress" placeholder="abcd" />
+<!-- Enter City here -->
+<p>City *</p> <input type="text" name="city" placeholder="abcd" />
+<span id="city"></span>
+<!-- Enter State details here -->
+<p>State *</p> <input type="text" name="state" placeholder="abcd" />
+<span id="state"></span>
+<!-- Enter Zip here-->
+<p>Zip *</p>
+<input type="text" id="zip" name="zip" placeholder="12345" onBlur="onzipBlur()" maxlength="5"/>
+<span id="zipErrMsg"></span>
+<!-- Enter Telephone No. here-->
+<p>Telephone Number *</p>
+<input type="text" id="number" name="telephone" placeholder="12345" maxlength="10"/>
+<span id="NumberErrMsg"></span>
+<!-- Enter email here -->
+<p>E-mail Address *</p>
+<input type="email" name="email" placeholder="abcd@domain.com" />
+</div>
+<!-- Enter DOS -->
+<p>Date Of Survey *</p>
+<input type="date" name="date" maxlength="16"/> 
+<p>What did you like the most about the campus ?</p>
+	<input type="checkbox" name="likeuni" value="Students" />Students 
+    <input type="checkbox" name="likeuni" value="Location" />Location 
+    <input type="checkbox" name="likeuni" value="Campus" />Campus 
+    <input type="checkbox" name="likeuni" value="Atmosphere" />Atmosphere 
+    <input type="checkbox" name="likeuni" value="Dormrooms" />Dorm rooms 
+    <input type="checkbox" name="likeuni" value="Sports" />Sports 
+<p> How did you become interested in the university</p>
+  <input type="radio" name="intinuni" value="true" checked> Friends
+  <input type="radio" name="intinuni" value="true"> Television
+  <input type="radio" name="intinuni" value="true"> Internet
+  <input type="radio" name="intinuni" value="true"> Other ? 
+<!-- Drop list -->
+<p>How likely are you to recommend our campus to Prospective Students ?</p>
+<input list="likeliness" name="Likeliness">
+  <datalist id="likeliness">
+    <option value="Very Likely!!"></option>
+    <option value="Likely!"></option>
+    <option value="Unlikely"></option>
+  </datalist>
+<p>Raffle</p>
+<input type="text" style="width:450px" name = "raffle" placeholder="Enter atleast 10 comma separated values from 1 to 100" />
+<p>Additional Comments? </p>
+  <textarea name="comment" value="Enter Comments" maxvalue="300"> </textarea>
+<div class="w3-col m6 w3-container">
+<p>SUBMIT or CANCEL ?</p>
+  <button type="button">Submit</button>
+  <button type="button">Cancel</button>
+</body>
+</form>
+</body>
+</html>
