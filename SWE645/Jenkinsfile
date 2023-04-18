@@ -1,0 +1,53 @@
+]pipeline {
+    environment {
+        registry = "vaishnavialuru/myimg"
+        registryCredential = 'Docker'
+        DOCKERHUB_PASS = credentials('Docker')
+        TIMESTAMP = new Date().format("yyyyMMdd_HHmmss")
+    }
+    agent any
+
+    stages{
+
+            stage('Build survey page') {
+                steps {
+                    script {
+                        sh 'rm -rf *.war'
+                        sh 'jar -cvf SWE645.war -C src/main/webapp/ .'
+                        sh 'echo ${BUILD_TIMESTAMP}'
+
+                        docker.withRegistry('',registryCredential){
+                            def customImage = docker.build("vaishnavialuru/myimg:${env.TIMESTAMP}")
+                        }
+                   }
+                }
+            }
+
+            stage('Push to Docker') {
+                steps {
+                    script {
+                        docker.withRegistry('',registryCredential){
+                          sh "docker push vaishnavialuru/myimg:${env.TIMESTAMP}"
+                       }
+                    }
+                }
+            }
+
+          stage('Deploying Rancher to single node') {
+             steps {
+                script{
+                    sh "kubectl set image deployment/deploymain container-0=vaishnavialuru/myimg:${env.TIMESTAMP}"
+                }
+             }
+          }
+
+        stage('Deploying Rancher to Load Balancer') {
+           steps {
+              script{
+                  sh "kubectl set image deployment/deploylb container-0=vaishnavialuru/myimg:${env.TIMESTAMP}"
+              }
+           }
+        }
+    }
+}
+Footer
