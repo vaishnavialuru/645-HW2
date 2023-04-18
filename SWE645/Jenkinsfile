@@ -17,7 +17,7 @@ pipeline {
                         sh 'echo ${BUILD_TIMESTAMP}'
 
                         docker.withRegistry('',registryCredential){
-                            def customImage = docker.build("vaishnavialuru/myimg:${env.TIMESTAMP}")
+                            def customImage = docker.build("vaishnavialuru/myimg:${BUILD_TIMESTAMP}")
                         }
                    }
                 }
@@ -27,7 +27,7 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry('',registryCredential){
-                          sh "docker push vaishnavialuru/myimg:${env.TIMESTAMP}"
+                          sh "docker push vaishnavialuru/myimg:${BUILD_TIMESTAMP}"
                        }
                     }
                 }
@@ -36,7 +36,7 @@ pipeline {
           stage('Deploying Rancher to single node') {
              steps {
                 script{
-                    sh "kubectl set image deployment/deploymain container-0=vaishnavialuru/myimg:${env.TIMESTAMP}"
+                    sh "kubectl set image deployment/deploymain container-0=vaishnavialuru/myimg:${BUILD_TIMESTAMP}"
                 }
              }
           }
@@ -44,7 +44,7 @@ pipeline {
         stage('Deploying Rancher to Load Balancer') {
            steps {
               script{
-                  sh "kubectl set image deployment/deploylb container-0=vaishnavialuru/myimg:${env.TIMESTAMP}"
+                  sh "kubectl set image deployment/deploylb container-0=vaishnavialuru/myimg:${BUILD_TIMESTAMP}"
               }
            }
         }
