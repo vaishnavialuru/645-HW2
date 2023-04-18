@@ -1,4 +1,4 @@
-]pipeline {
+pipeline {
     environment {
         registry = "vaishnavialuru/myimg"
         registryCredential = 'Docker'
@@ -13,7 +13,7 @@
                 steps {
                     script {
                         sh 'rm -rf *.war'
-                        sh 'jar -cvf SWE645.war -C src/main/webapp/ .'
+                        sh 'jar -cvf SWE645.war -C SWE645/src/main/webapp/ .'
                         sh 'echo ${BUILD_TIMESTAMP}'
 
                         docker.withRegistry('',registryCredential){
